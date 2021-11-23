@@ -22,7 +22,6 @@ namespace Chessington.GameEngine.Pieces
                 {
                     moves.Add(new Square(curSquare.Row - 2, curSquare.Col));
                 }
-                 
                 
             }
             else if (this.Player == Player.Black)
