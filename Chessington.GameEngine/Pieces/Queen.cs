@@ -25,7 +25,6 @@ namespace Chessington.GameEngine.Pieces
                 {
                     availMoves.Add(newSquareY);
                 }
-               
             }
             var newSquare = new Square(curSquare.Row + 1, curSquare.Col + 1);
             while (board.IsValid(newSquare))
