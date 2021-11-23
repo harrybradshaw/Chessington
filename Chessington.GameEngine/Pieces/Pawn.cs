@@ -18,7 +18,8 @@ namespace Chessington.GameEngine.Pieces
                 {
                     moves.Add(new Square(curSquare.Row - 1, curSquare.Col));
                 }
-                if (curSquare.Row == 7 && board.GetPiece(new Square(curSquare.Row - 2, curSquare.Col)) == null)
+                if (curSquare.Row == 6 && board.GetPiece(new Square(curSquare.Row - 2, curSquare.Col)) == null
+                && board.GetPiece(new Square(curSquare.Row - 1, curSquare.Col)) == null)
                 {
                     moves.Add(new Square(curSquare.Row - 2, curSquare.Col));
                 }
@@ -30,7 +31,8 @@ namespace Chessington.GameEngine.Pieces
                 {
                     moves.Add(new Square(curSquare.Row + 1, curSquare.Col));
                 }
-                if (curSquare.Row == 1 && board.GetPiece(new Square(curSquare.Row + 2, curSquare.Col)) == null)
+                if (curSquare.Row == 1 && board.GetPiece(new Square(curSquare.Row + 2, curSquare.Col)) == null && 
+                    board.GetPiece(new Square(curSquare.Row +1 , curSquare.Col)) == null)
                 {
                     moves.Add(new Square(curSquare.Row + 2, curSquare.Col));
                 }

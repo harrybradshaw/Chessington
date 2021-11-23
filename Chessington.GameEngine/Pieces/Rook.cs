@@ -12,14 +12,58 @@ namespace Chessington.GameEngine.Pieces
         {
             var curSquare = board.FindPiece(this);
             var availMoves = new List<Square>();
-            for (int i = 0; i < 8; i++)
+            var tempSquare = new Square(curSquare.Row - 1, curSquare.Col);
+            while (board.IsValid(tempSquare))
             {
-                var newSquareX = new Square(curSquare.Row,i);
-                availMoves.Add(newSquareX);
-                var newSquareY = new Square(i,curSquare.Col);
-                availMoves.Add(newSquareY);
+                if (board.GetPiece(tempSquare) == null)
+                {
+                    availMoves.Add(tempSquare);
+                    tempSquare = new Square(tempSquare.Row - 1, tempSquare.Col);
+                }
+                else
+                {
+                    break;
+                }
             }
-            
+            tempSquare = new Square(curSquare.Row , curSquare.Col + 1);
+            while (board.IsValid(tempSquare))
+            {
+                if (board.GetPiece(tempSquare) == null)
+                {
+                    availMoves.Add(tempSquare);
+                    tempSquare = new Square(tempSquare.Row, tempSquare.Col +1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            tempSquare = new Square(curSquare.Row, curSquare.Col - 1);
+            while (board.IsValid(tempSquare))
+            {
+                if (board.GetPiece(tempSquare) == null)
+                {
+                    availMoves.Add(tempSquare);
+                    tempSquare = new Square(tempSquare.Row, tempSquare.Col -1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            tempSquare = new Square(curSquare.Row + 1, curSquare.Col);
+            while (board.IsValid(tempSquare))
+            {
+                if (board.GetPiece(tempSquare) == null)
+                {
+                    availMoves.Add(tempSquare);
+                    tempSquare = new Square(tempSquare.Row + 1, tempSquare.Col);
+                }
+                else
+                {
+                    break;
+                }
+            }
             return availMoves;
         }
     }
