@@ -12,57 +12,12 @@ namespace Chessington.GameEngine.Pieces
         {
             var curSquare = board.FindPiece(this);
             var availMoves = new List<Square>();
-            var tempSquare = new Square(curSquare.Row - 1, curSquare.Col);
-            while (board.IsValid(tempSquare))
+
+            int[,] dirs = {{1,0},{0,-1},{-1,0},{0,1} };
+            for (int i = 0; i < 4; i++)
             {
-                if (board.GetPiece(tempSquare) == null)
-                {
-                    availMoves.Add(tempSquare);
-                    tempSquare = new Square(tempSquare.Row - 1, tempSquare.Col);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            tempSquare = new Square(curSquare.Row , curSquare.Col + 1);
-            while (board.IsValid(tempSquare))
-            {
-                if (board.GetPiece(tempSquare) == null)
-                {
-                    availMoves.Add(tempSquare);
-                    tempSquare = new Square(tempSquare.Row, tempSquare.Col +1);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            tempSquare = new Square(curSquare.Row, curSquare.Col - 1);
-            while (board.IsValid(tempSquare))
-            {
-                if (board.GetPiece(tempSquare) == null)
-                {
-                    availMoves.Add(tempSquare);
-                    tempSquare = new Square(tempSquare.Row, tempSquare.Col -1);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            tempSquare = new Square(curSquare.Row + 1, curSquare.Col);
-            while (board.IsValid(tempSquare))
-            {
-                if (board.GetPiece(tempSquare) == null)
-                {
-                    availMoves.Add(tempSquare);
-                    tempSquare = new Square(tempSquare.Row + 1, tempSquare.Col);
-                }
-                else
-                {
-                    break;
-                }
+                int[] dir = {dirs[i, 0],dirs[i,1]};
+                GetMovesDirection(board, availMoves, dir);
             }
             return availMoves;
         }

@@ -12,29 +12,11 @@ namespace Chessington.GameEngine.Pieces
         {
             var availMoves = new List<Square>();
             var curSquare = board.FindPiece(this);
-            var newSquare = new Square(curSquare.Row + 1, curSquare.Col + 1);
-            while (board.IsValid(newSquare))
+            int[,] dirs = {{1,1},{1,-1},{-1,1},{-1,-1} };
+            for (int i = 0; i < 4; i++)
             {
-                availMoves.Add(newSquare);
-                newSquare = new Square(newSquare.Row + 1, newSquare.Col + 1);
-            }
-            newSquare = new Square(curSquare.Row + 1, curSquare.Col -1 );
-            while (board.IsValid(newSquare))
-            {
-                availMoves.Add(newSquare);
-                newSquare = new Square(newSquare.Row + 1, newSquare.Col - 1);
-            }
-            newSquare = new Square(curSquare.Row - 1, curSquare.Col + 1);
-            while (board.IsValid(newSquare))
-            {
-                availMoves.Add(newSquare);
-                newSquare = new Square(newSquare.Row - 1, newSquare.Col + 1);
-            }
-            newSquare = new Square(curSquare.Row - 1, curSquare.Col - 1);
-            while (board.IsValid(newSquare))
-            {
-                availMoves.Add(newSquare);
-                newSquare = new Square(newSquare.Row - 1, newSquare.Col - 1);
+                int[] dir = {dirs[i, 0],dirs[i,1]};
+                GetMovesDirection(board, availMoves, dir);
             }
             return availMoves;
         }
