@@ -17,18 +17,27 @@ namespace Chessington.GameEngine.Pieces
                 if (curSquare.Row > 1 && board.GetPiece(new Square(curSquare.Row - 1, curSquare.Col)) == null)
                 {
                     moves.Add(new Square(curSquare.Row - 1, curSquare.Col));
-                    return moves;
                 }
+                if (curSquare.Row == 7 && board.GetPiece(new Square(curSquare.Row - 2, curSquare.Col)) == null)
+                {
+                    moves.Add(new Square(curSquare.Row - 2, curSquare.Col));
+                }
+                 
+                
             }
             else if (this.Player == Player.Black)
             {
                 if (curSquare.Row < 8 && board.GetPiece(new Square(curSquare.Row + 1, curSquare.Col)) == null)
                 {
                     moves.Add(new Square(curSquare.Row + 1, curSquare.Col));
-                    return moves;
+                }
+                if (curSquare.Row == 1 && board.GetPiece(new Square(curSquare.Row + 2, curSquare.Col)) == null)
+                {
+                    moves.Add(new Square(curSquare.Row + 2, curSquare.Col));
                 }
             }
-            return Enumerable.Empty<Square>();
+
+            return moves;
         }
     }
 }
