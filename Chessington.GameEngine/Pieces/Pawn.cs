@@ -27,7 +27,7 @@ namespace Chessington.GameEngine.Pieces
             }
             else if (this.Player == Player.Black)
             {
-                if (curSquare.Row < 8 && board.GetPiece(new Square(curSquare.Row + 1, curSquare.Col)) == null)
+                if (curSquare.Row < 7 && board.GetPiece(new Square(curSquare.Row + 1, curSquare.Col)) == null)
                 {
                     moves.Add(new Square(curSquare.Row + 1, curSquare.Col));
                 }
