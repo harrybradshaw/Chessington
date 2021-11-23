@@ -44,5 +44,24 @@ namespace Chessington.GameEngine.Pieces
             }
             return availMoves;
         }
+
+        public List<Square> GetMovesDirectionSingular(Board board, List<Square> availMoves, int[] dir)
+        {
+            var curSquare = board.FindPiece(this);
+            var newSquare = new Square(curSquare.Row + dir[0], curSquare.Col + dir[1]);
+            if (board.IsValid(newSquare))
+            {
+                if (board.GetPiece(newSquare) == null)
+                {
+                    availMoves.Add(newSquare);
+                    newSquare = new Square(newSquare.Row + dir[0], newSquare.Col + dir[1]);
+                }else if (!this.Player.Equals(board.GetPiece(newSquare).Player))
+                {
+                    availMoves.Add(newSquare);
+                }
+                
+            }
+            return availMoves;
+        }
     }
 }

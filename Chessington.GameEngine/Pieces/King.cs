@@ -13,16 +13,12 @@ namespace Chessington.GameEngine.Pieces
             var availMoves = new List<Square>();
             var curSquare = board.FindPiece(this);
             
-            int[,] moves = new int[,] {{1, 0}, {-1, 0}, {-1, 1}, {1, -1}, {0,1}, {0,-1}, {1, 1}, {-1,-1}};
+            int[,] dirs = {{1, 0}, {-1, 0}, {-1, 1}, {1, -1}, {0,1}, {0,-1}, {1, 1}, {-1,-1}};
             for (int i = 0; i < 8; i++)
             {
-                var tempSquare = new Square(curSquare.Row + moves[i, 0], curSquare.Col + moves[i, 1]);
-                if (board.IsValid(tempSquare))
-                {
-                    availMoves.Add(tempSquare);
-                }
+                int[] dir = {dirs[i, 0],dirs[i,1]};
+                GetMovesDirectionSingular(board, availMoves, dir);
             }
-
             return availMoves;
         }
     }
