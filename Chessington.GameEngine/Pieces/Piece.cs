@@ -33,6 +33,12 @@ namespace Chessington.GameEngine.Pieces
                     newSquare = new Square(newSquare.Row + dir[0], newSquare.Col + dir[1]);
                 }else
                 {
+                    //Square is not empty but...
+                    if (!this.Player.Equals(board.GetPiece(newSquare).Player))
+                    {
+                        //Its the opponents piece. Valid move.
+                        availMoves.Add(newSquare);
+                    }
                     break;
                 }
             }
