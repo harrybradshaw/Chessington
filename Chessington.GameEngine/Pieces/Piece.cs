@@ -54,8 +54,8 @@ namespace Chessington.GameEngine.Pieces
                 if (board.GetPiece(newSquare) == null)
                 {
                     availMoves.Add(newSquare);
-                    newSquare = new Square(newSquare.Row + dir[0], newSquare.Col + dir[1]);
-                }else if (!this.Player.Equals(board.GetPiece(newSquare).Player))
+                }
+                else if (!this.Player.Equals(board.GetPiece(newSquare).Player))
                 {
                     availMoves.Add(newSquare);
                 }

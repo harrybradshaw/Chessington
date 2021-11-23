@@ -7,6 +7,24 @@ namespace Chessington.GameEngine.Pieces
     {
         public King(Player player)
             : base(player) { }
+        
+        public new List<Square> GetMovesDirectionSingular(Board board, List<Square> availMoves, int[] dir)
+        {
+            var curSquare = board.FindPiece(this);
+            var newSquare = new Square(curSquare.Row + dir[0], curSquare.Col + dir[1]);
+            if (board.IsValid(newSquare))
+            {
+                if (board.GetPiece(newSquare) == null)
+                {
+                    availMoves.Add(newSquare);
+                   
+                }else if (!this.Player.Equals(board.GetPiece(newSquare).Player) )
+                {
+                    availMoves.Add(newSquare);
+                }
+            }
+            return availMoves;
+        }
 
         public override IEnumerable<Square> GetAvailableMoves(Board board)
         {
@@ -21,5 +39,11 @@ namespace Chessington.GameEngine.Pieces
             }
             return availMoves;
         }
+
+        public bool IsMoveIntoCheck(Board board, Square newSquare, Square oldSquare)
+        {
+            return board.SimulateMoveForCheck(oldSquare, newSquare);
+        }
+        
     }
 }

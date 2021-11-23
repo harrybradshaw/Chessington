@@ -9,7 +9,7 @@ namespace Chessington.GameEngine
     {
         private readonly Piece[,] board;
         public Player CurrentPlayer { get; private set; }
-        public IList<Piece> CapturedPieces { get; private set; } 
+        public IList<Piece> CapturedPieces { get; private set; }
 
         public Board()
             : this(Player.White) { }
@@ -65,6 +65,31 @@ namespace Chessington.GameEngine
             OnCurrentPlayerChanged(CurrentPlayer);
         }
         
+        public bool SimulateMoveForCheck(Square from, Square to)
+        {
+            var movingPiece = board[from.Row, from.Col];
+            var tempPiece = board[to.Row, to.Col];
+            board[to.Row, to.Col] = board[from.Row, from.Col];
+            board[from.Row, from.Col] = null;
+            var checkFlag = false;
+
+            foreach (var piece in board)
+            {
+                if (piece != null && piece.Player != CurrentPlayer && typeof(King)!= piece.GetType())
+                {
+                    if (piece.GetAvailableMoves(this).Contains(to))
+                    {
+                        checkFlag = true;
+                    }
+                }
+                
+            }
+
+            board[from.Row, from.Col] = movingPiece;
+            board[to.Row, to.Col] = tempPiece;
+            return checkFlag;
+        }
+        
         public delegate void PieceCapturedEventHandler(Piece piece);
         
         public event PieceCapturedEventHandler PieceCaptured;
@@ -87,14 +112,7 @@ namespace Chessington.GameEngine
 
         public bool IsValid(Square square)
         {
-            if (square.Row >= 0 && square.Row <= 7 && square.Col <= 7 && square.Col >= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return square.Row >= 0 && square.Row <= 7 && square.Col <= 7 && square.Col >= 0;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Chessington.GameEngine.Tests
             var board = new Board();
             var pawn = new Pawn(Player.White);
             board.AddPiece(Square.At(0, 0), pawn);
-
             board.GetPiece(Square.At(0, 0)).Should().BeSameAs(pawn);
         }
 
