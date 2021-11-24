@@ -42,7 +42,27 @@ namespace Chessington.GameEngine.Pieces
 
         public bool IsMoveIntoCheck(Board board, Square newSquare, Square oldSquare)
         {
-            return board.SimulateMoveForCheck(oldSquare, newSquare);
+            var checkFlag = false;
+            var simBoard = new Board();
+
+            foreach (var piece in board.board)
+            {
+                var tempSquare = board.FindPiece(piece);
+                var square = new Square(tempSquare.Row,tempSquare.Col);
+                if (piece.GetType() == typeof(King))
+                {
+                    var tempPiece = new King(piece.Player);
+                    simBoard.AddPiece(square,tempPiece);
+                } else if (piece.GetType() == typeof(Queen))
+                {
+                    var tempPiece = new Queen(piece.Player);
+                    simBoard.AddPiece(square,tempPiece);
+                }
+                
+                
+            }
+
+            return checkFlag;
         }
         
     }
